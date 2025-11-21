@@ -374,7 +374,25 @@ export function Step2Workspace({
   }
 
   return (
-    <div className="space-y-8">
+    <div className="relative min-h-screen w-full">
+      {/* Vídeo de fundo */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <video
+          src="/video1.mp4"
+          loop
+          muted
+          autoPlay
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/video1.mp4" type="video/mp4" />
+          Seu navegador não suporta a tag de vídeo.
+        </video>
+        {/* Overlay escuro para melhorar legibilidade */}
+        <div className="absolute inset-0 bg-black/50 z-10" />
+      </div>
+      {/* Conteúdo */}
+      <div className="relative z-20 space-y-8">
       {/* Header combinado: logo, nome, desconto (quando houver) e redes sociais */}
       {(lojistaNome || isSimulator) && (
         <div className="rounded-2xl border border-white/20 bg-gradient-to-br from-blue-800/90 via-indigo-700/90 to-purple-500/90 px-5 py-4 shadow-xl shadow-black/30">
@@ -761,6 +779,7 @@ export function Step2Workspace({
             </div>
           )}
         </section>
+      </div>
       </div>
     </div>
   )

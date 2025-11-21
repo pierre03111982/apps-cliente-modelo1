@@ -452,7 +452,25 @@ export function Step3Results({
   )
 
   return (
-    <div className="space-y-10">
+    <div className="relative min-h-screen w-full">
+      {/* Vídeo de fundo */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <video
+          src="/video1.mp4"
+          loop
+          muted
+          autoPlay
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/video1.mp4" type="video/mp4" />
+          Seu navegador não suporta a tag de vídeo.
+        </video>
+        {/* Overlay escuro para melhorar legibilidade */}
+        <div className="absolute inset-0 bg-black/50 z-10" />
+      </div>
+      {/* Conteúdo */}
+      <div className="relative z-20 space-y-10">
       <div className="text-center">
         {lojistaLogoUrl && (
           <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-2 border-slate-100 bg-white shadow-2xl shadow-black/60">
@@ -852,6 +870,7 @@ export function Step3Results({
           </div>
         </div>
       )}
+      </div>
     </div>
   )
 }
