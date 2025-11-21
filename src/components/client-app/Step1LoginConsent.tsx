@@ -255,7 +255,17 @@ export function Step1LoginConsent({
   }
 
   return (
-    <div className="space-y-10">
+    <div className="relative min-h-screen w-full">
+      {/* Imagem de fundo limpa - fixa */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <img
+          src="/background.jpg"
+          alt="Background"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </div>
+      {/* Conteúdo por cima de tudo */}
+      <div className="relative z-20 space-y-10">
       <div className="text-center">
         {lojistaLogoUrl && (
           <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-2 border-white/30 bg-white shadow-xl">
@@ -462,6 +472,7 @@ export function Step1LoginConsent({
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )
