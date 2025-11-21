@@ -375,23 +375,30 @@ export function Step2Workspace({
 
   return (
     <div className="relative min-h-screen w-full">
-      {/* Vídeo de fundo */}
+      {/* Imagem de fundo original com blur de 20% (aproximadamente 8px) */}
       <div className="fixed inset-0 z-0 overflow-hidden">
+        <img
+          src="/background.jpg"
+          alt="Background"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ filter: 'blur(8px)' }}
+        />
+      </div>
+      {/* Vídeo por cima da imagem com 80% de transparência (opacity 0.2) */}
+      <div className="fixed inset-0 z-10 overflow-hidden">
         <video
           src="/video1.mp4"
           loop
           muted
           autoPlay
           playsInline
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover opacity-20"
         >
           <source src="/video1.mp4" type="video/mp4" />
           Seu navegador não suporta a tag de vídeo.
         </video>
-        {/* Overlay escuro para melhorar legibilidade */}
-        <div className="absolute inset-0 bg-black/50 z-10" />
       </div>
-      {/* Conteúdo */}
+      {/* Conteúdo e botões por cima de tudo */}
       <div className="relative z-20 space-y-8">
       {/* Header combinado: logo, nome, desconto (quando houver) e redes sociais */}
       {(lojistaNome || isSimulator) && (
