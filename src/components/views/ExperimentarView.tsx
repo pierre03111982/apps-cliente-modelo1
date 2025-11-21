@@ -16,7 +16,6 @@ import {
   Facebook,
   Music2
 } from "lucide-react"
-import { ExperimentarViewProps } from "@/lib/types" // Vou precisar definir isso ou copiar
 import { useRouter } from "next/navigation"; // Importar useRouter
 
 // Definindo a interface aqui por enquanto para ser independente
