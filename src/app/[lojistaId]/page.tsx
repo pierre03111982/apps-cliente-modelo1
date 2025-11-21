@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, Suspense } from "react"
 import { useParams, useSearchParams } from "next/navigation"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { Step1LoginConsent } from "@/components/client-app/Step1LoginConsent"
@@ -98,7 +98,7 @@ const mockLojistaData: LojistaData = {
   descontoRedesSociais: null,
 }
 
-export default function ClienteAppPage() {
+function ClienteAppPageContent() {
   const params = useParams()
   const searchParams = useSearchParams()
   const lojistaId = (params?.lojistaId as string) || ""
@@ -781,6 +781,14 @@ export default function ClienteAppPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function ClienteAppPage() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <ClienteAppPageContent />
+    </Suspense>
   )
 }
 
