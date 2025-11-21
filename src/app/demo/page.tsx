@@ -1,7 +1,6 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
-import { Suspense } from "react"
 import Image from "next/image" // Adicionar Image
 import { Camera, User, Share2, ShoppingBag, Check, ArrowLeftCircle, LogIn, UserPlus, Sparkles, RefreshCw, Home } from "lucide-react"
 import { FaApple, FaFacebook, FaGoogle, FaWhatsapp } from "react-icons/fa" // Adicionar icones sociais e whatsapp
@@ -9,7 +8,7 @@ import { ExperimentarView } from "@/components/views/ExperimentarView"
 import { useState } from "react"
 import { Produto } from "@/lib/types"
 
-function DemoPageContent() {
+export default function DemoPage() {
   const searchParams = useSearchParams()
   const tela = searchParams.get("tela") || "1"
 
@@ -304,12 +303,4 @@ function DemoPageContent() {
   }
 
   return <div className="text-zinc-800">Selecione uma tela para pré-visualizar.</div>
-}
-
-export default function DemoPage() {
-  return (
-    <Suspense fallback={<div className="text-zinc-800">Carregando...</div>}>
-      <DemoPageContent />
-    </Suspense>
-  )
 }
