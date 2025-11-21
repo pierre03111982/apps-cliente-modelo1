@@ -1,8 +1,11 @@
+"use client"
+
 import type { LojistaData, GeneratedLook } from "@/lib/types";
-import { useParams, useRouter } from "react-router-dom";
+import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
-import { ArrowLeftCircle, ShoppingCart, Share2, Sparkles, RefreshCw, Home } from "lucide-react";
+import { ArrowLeftCircle, ShoppingCart, Share2, Sparkles, RefreshCw, Home, Heart, ThumbsDown, ThumbsUp, X } from "lucide-react";
 import Image from "next/image";
+import { fetchLojistaData } from "@/lib/firebaseQueries"; // Importar fetchLojistaData
 
 const getBackendUrl = () => {
   if (typeof window !== "undefined") {
@@ -67,6 +70,7 @@ export default function ResultadoPage() {
         }
 
         if (!lojistaDb) {
+          // @ts-ignore
           lojistaDb = await fetchLojistaData(lojistaId).catch(() => null);
         }
 
@@ -543,38 +547,37 @@ export default function ResultadoPage() {
   if (!currentLook) {
     return (
       <div className="relative min-h-screen w-screen overflow-hidden flex items-center justify-center">
-        <div className="text-zinc-800">Carregando...</div>
+        <div className="text-white">Carregando...</div>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen w-screen overflow-hidden text-zinc-800">
+    <div className="relative min-h-screen w-screen overflow-hidden bg-zinc-950 text-white">
       {/* Imagem de Fundo Fixa */}
       <div className="fixed inset-0 z-0">
         <img
           src="/background.jpg"
           alt="Fundo"
-          className="absolute inset-0 h-full w-full object-cover opacity-30"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm" />
       </div>
 
       {/* Conteúdo Principal */}
-      <div className="relative z-10 min-h-screen flex flex-col p-4 items-center justify-center space-y-4">
+      <div className="relative z-10 min-h-screen flex flex-col p-4 items-center justify-center space-y-3">
         {/* Caixa com Logo e Nome da Loja (adaptada) */}
         <div className="w-full max-w-sm">
           <div
-            className="rounded-xl border border-zinc-200 bg-white/70 backdrop-blur-md px-3 py-2 shadow-sm flex items-center justify-center gap-2 relative"
+            className="rounded-xl border-2 border-zinc-700 bg-zinc-800/70 backdrop-blur-md px-3 py-2 shadow-lg flex items-center justify-center gap-2 relative"
           >
             <button
               onClick={() => router.push(`/${lojistaId}/experimentar`)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 p-1 text-zinc-600 hover:text-zinc-900 transition"
+              className="absolute left-3 top-1/2 -translate-y-1/2 p-1 text-white hover:text-zinc-200 transition"
             >
               <ArrowLeftCircle className="h-5 w-5" />
             </button>
             {lojistaData?.logoUrl && (
-              <div className="h-10 w-10 overflow-hidden rounded-full border border-zinc-300 flex-shrink-0">
+              <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-zinc-600 flex-shrink-0">
                 <Image
                   src={lojistaData.logoUrl}
                   alt={lojistaData.nome || "Logo"}
@@ -585,7 +588,7 @@ export default function ResultadoPage() {
               </div>
             )}
             <h3
-              className="text-base font-bold text-zinc-700"
+              className="text-base font-bold text-white"
               translate="no"
             >
               {lojistaData?.nome || "Loja"}
@@ -595,63 +598,187 @@ export default function ResultadoPage() {
 
         {/* Card Principal do Look */}
         <div
-          className="relative w-full max-w-sm space-y-4 rounded-2xl border border-zinc-200 bg-white/70 backdrop-blur-md p-4 shadow-sm"
+          className="relative w-full max-w-sm space-y-3 rounded-2xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-4 shadow-lg"
         >
-          {/* Imagem Gerada */}
-          <div className="w-full rounded-xl overflow-hidden border border-zinc-200">
-            <img
-              src={currentLook.imagemUrl}
-              alt={currentLook.titulo}
-              className="h-auto w-full object-cover rounded-lg"
-            />
+          {/* Tag Look Criativo IA */}
+          <div className="absolute top-2 right-2 z-10">
+            <span 
+              className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium border-2 border-white/50 text-white"
+              style={{
+                background:
+                  "linear-gradient(45deg, rgba(37,99,235,1), rgba(147,51,234,1), rgba(249,115,22,1), rgba(34,197,94,1))",
+              }}
+            >
+              <Sparkles className="h-4 w-4 text-white" style={{ filter: "drop-shadow(0 0 2px white)"}} />
+              Look Criativo IA
+            </span>
           </div>
 
-          {/* Título e Botões de Ação */}
-          <div className="space-y-4 text-center">
-            <h2 className="text-lg font-bold text-zinc-800">Look Perfeito!</h2>
-            <p className="text-sm text-zinc-600">Com: {currentLook.produtoNome}</p>
-
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={handleCheckout}
-                className="flex items-center justify-center gap-2 rounded-lg bg-green-600 text-white py-2.5 font-semibold text-sm transition hover:bg-green-700"
-              >
-                <ShoppingCart className="h-4 w-4" /> Comprar
-              </button>
-              <button
-                onClick={handleShare}
-                className="flex items-center justify-center gap-2 rounded-lg bg-zinc-200 text-zinc-700 py-2.5 font-semibold text-sm transition hover:bg-zinc-300"
-              >
-                <Share2 className="h-4 w-4" /> Compartilhar
-              </button>
+          {/* Imagem Gerada */}
+          <div className="w-full rounded-xl overflow-hidden">
+            <div className="relative rounded-2xl border-2 border-white/50 p-2 shadow-lg bg-purple-500/30 backdrop-blur-md inline-block w-full">
+              <div className="relative border-2 border-dashed border-white/30 rounded-xl p-1 inline-block w-full">
+                <img
+                  src={currentLook.imagemUrl}
+                  alt={currentLook.titulo}
+                  className="h-auto w-full object-cover rounded-lg"
+                />
+              </div>
             </div>
+          </div>
 
-            {/* Outras Ações */} 
-            <div className="flex flex-col gap-3 mt-4">
-              <button
-                onClick={handleAddAccessory}
-                className="w-full flex items-center justify-center gap-2 rounded-lg bg-indigo-600 text-white py-2.5 font-semibold text-sm transition hover:bg-indigo-700"
+          {/* Ações e Feedback */}
+          <div className="space-y-2">
+            {!hasVoted ? (
+              <div 
+                className="text-center rounded-2xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-4 shadow-lg"
               >
-                <Sparkles className="h-4 w-4" /> Adicionar Acessório
-              </button>
-              <button
-                onClick={handleRegenerate}
-                disabled={loadingAction === "remix"}
-                className="w-full flex items-center justify-center gap-2 rounded-lg bg-sky-600 text-white py-2.5 font-semibold text-sm transition hover:bg-sky-700 disabled:opacity-50"
-              >
-                <RefreshCw className={`h-4 w-4 ${loadingAction === "remix" ? "animate-spin" : ""}`} /> Remixar Look
-              </button>
-              <button
-                onClick={handleGoHome}
-                className="w-full flex items-center justify-center gap-2 rounded-lg bg-zinc-200 text-zinc-700 py-2.5 font-semibold text-sm transition hover:bg-zinc-300"
-              >
-                <Home className="h-4 w-4" /> Criar outro
-              </button>
-            </div>
+                <p className="mb-3 font-semibold text-white">Curtiu o Look?</p>
+                <div className="flex justify-center gap-4">
+                  <button onClick={handleDislike} disabled={loadingAction === "dislike"} className="flex flex-1 items-center justify-center gap-2 rounded-full bg-red-500/80 px-6 py-2 text-white border-2 border-red-500/50 disabled:opacity-50">
+                    <ThumbsDown className="h-5 w-5" /> Não
+                  </button>
+                  <button onClick={handleLike} disabled={loadingAction === "like"} className="flex flex-1 items-center justify-center gap-2 rounded-full bg-green-500/80 px-6 py-2 text-white border-2 border-green-500/50 disabled:opacity-50">
+                    <ThumbsUp className="h-5 w-5" /> Sim
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <div className="text-center">
+                  {votedType === 'like' ? (
+                    <>
+                      <h2 className="text-xl font-bold text-white">Look Salvo!</h2>
+                      <p className="text-sm text-gray-300">O que fazer agora?</p>
+                    </>
+                  ) : (
+                    <>
+                      <h2 className="text-xl font-bold text-white">Que pena!</h2>
+                      <p className="text-sm text-gray-300">Vamos tentar um novo look?</p>
+                    </>
+                  )}
+                </div>
 
+                {/* Card 1: Ações Primárias de Compra */}
+                <div className="space-y-2 rounded-2xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-3 shadow-lg">
+                  <button 
+                    onClick={handleCheckout} 
+                    className="w-full flex items-center justify-center gap-2 rounded-xl py-3.5 font-semibold text-white shadow-lg text-sm border-2 border-white/20"
+                    style={{ background: "linear-gradient(to right, #1e3a8a, #3b82f6, #1e3a8a)"}}
+                  >
+                    <ShoppingCart className="h-4 w-4" /> Comprar Agora
+                  </button>
+                  <button onClick={handleCheckout} className="w-full flex items-center justify-center gap-2 rounded-xl bg-white/20 py-3 font-semibold text-white text-sm border-2 border-white/20">
+                    <ShoppingCart className="h-4 w-4" /> Adicionar ao Carrinho
+                  </button>
+                </div>
+
+                {/* Card 2: Ações Secundárias */}
+                <div className="rounded-2xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-3 shadow-lg">
+                  <div className="grid grid-cols-2 gap-3">
+                    <button onClick={handleShare} className="flex items-center justify-center gap-2 rounded-xl bg-blue-600/80 py-3 font-semibold text-white text-sm border-2 border-blue-500/50">
+                      <Share2 className="h-4 w-4" />
+                    </button>
+                    <button onClick={() => setShowFavoritesModal(true)} className="flex items-center justify-center gap-2 rounded-xl bg-pink-600/80 py-3 font-semibold text-white text-sm border-2 border-pink-500/50">
+                      <Heart className="h-4 w-4" /> Favoritos
+                    </button>
+                  </div>
+                </div>
+
+                {/* Card 3: Ações de Navegação e Geração */}
+                <div className="space-y-2 rounded-2xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-3 shadow-lg">
+                  <button onClick={handleAddAccessory} className="w-full flex items-center justify-center gap-2 rounded-xl bg-purple-600/80 py-3 font-semibold text-white text-sm border-2 border-purple-500/50">
+                    <Sparkles className="h-4 w-4" /> Adicionar Acessório
+                  </button>
+                  <button onClick={handleRegenerate} disabled={loadingAction === "remix"} className="w-full flex items-center justify-center gap-2 rounded-xl bg-green-600/80 py-3 font-semibold text-white disabled:opacity-50 text-sm border-2 border-green-500/50">
+                    <RefreshCw className={`h-4 w-4 ${loadingAction === "remix" ? "animate-spin" : ""}`} /> 
+                    {loadingAction === "remix" ? "Gerando..." : "Remixar Look"}
+                  </button>
+                  <button onClick={handleGoHome} className="w-full flex items-center justify-center gap-2 rounded-xl bg-white/20 py-3 font-semibold text-white text-sm border-2 border-white/20">
+                    <Home className="h-4 w-4" /> Criar outro
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Modal de Favoritos */}
+      {showFavoritesModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
+          <div className="w-full max-w-4xl rounded-xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-6 max-h-[90vh] overflow-y-auto shadow-lg">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-white">Meus Favoritos</h2>
+              <button
+                onClick={() => setShowFavoritesModal(false)}
+                className="text-white/70 hover:text-white transition"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+
+            {isLoadingFavorites ? (
+              <div className="py-12 text-center text-white">Carregando favoritos...</div>
+            ) : favorites.length === 0 ? (
+              <div className="py-12 text-center text-white/70">
+                <Heart className="mx-auto mb-4 h-16 w-16 text-white/30" />
+                <p>Você ainda não tem favoritos.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {favorites.map((favorito) => (
+                  <div
+                    key={favorito.id}
+                    onClick={() => {
+                      // Salvar dados do favorito no sessionStorage
+                      const favoritoLook: GeneratedLook = {
+                        id: favorito.id || `favorito-${Date.now()}`,
+                        imagemUrl: favorito.imagemUrl,
+                        titulo: favorito.productName || "Look favorito",
+                        produtoNome: favorito.productName || "",
+                        produtoPreco: favorito.productPrice || null,
+                        compositionId: favorito.compositionId || null,
+                        jobId: favorito.jobId || null,
+                      }
+                      sessionStorage.setItem(`favorito_${lojistaId}`, JSON.stringify(favoritoLook))
+                      sessionStorage.setItem(`from_favoritos_${lojistaId}`, "true")
+                      // Fechar modal e recarregar página
+                      setShowFavoritesModal(false)
+                      // Recarregar a página para aplicar as mudanças
+                      window.location.href = `/${lojistaId}/resultado?from=favoritos`
+                    }}
+                    className="group relative overflow-hidden rounded-lg border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md transition hover:shadow-lg cursor-pointer"
+                  >
+                    {favorito.imagemUrl && (
+                      <div className="relative aspect-square w-full">
+                        <Image
+                          src={favorito.imagemUrl}
+                          alt={favorito.productName || "Look favorito"}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    {favorito.productName && (
+                      <div className="p-3 bg-purple-500/30 backdrop-blur-md">
+                        <p className="text-sm font-semibold text-white line-clamp-2">
+                          {favorito.productName}
+                        </p>
+                        {favorito.productPrice && (
+                          <p className="mt-1 text-xs font-bold text-yellow-300">
+                            {formatPrice(favorito.productPrice)}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -204,14 +204,11 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen w-screen overflow-hidden bg-white text-zinc-800">
+    <div className="relative min-h-screen w-screen overflow-hidden bg-zinc-950 text-white">
       {/* Background Image Fixa */}
-      <div className="fixed inset-0 z-0 opacity-30">
+      <div className="fixed inset-0 z-0">
         <img src="/background.jpg" alt="Background" className="w-full h-full object-cover" />
       </div>
-
-      {/* Overlay de cor clara */}
-      <div className="fixed inset-0 z-0 bg-white/80 backdrop-blur-sm" />
 
       {/* Conteúdo do Formulário */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 py-8 overflow-y-auto">
@@ -219,10 +216,10 @@ export default function LoginPage() {
         {/* Caixa com Logo e Nome da Loja */}
         <div className="w-full max-w-sm mb-6">
           <div
-            className="rounded-xl border border-zinc-200 bg-white/70 backdrop-blur-md px-3 py-2 shadow-lg flex items-center justify-center gap-2"
+            className="rounded-xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md px-3 py-2 shadow-lg flex items-center justify-center gap-2"
           >
             {lojistaData?.logoUrl && (
-              <div className="h-10 w-10 overflow-hidden rounded-full border border-zinc-300 flex-shrink-0">
+              <div className="h-10 w-10 overflow-hidden rounded-full border-2 border-purple-500/50 flex-shrink-0">
                 <Image
                   src={lojistaData.logoUrl}
                   alt={lojistaData.nome || "Logo"}
@@ -233,7 +230,7 @@ export default function LoginPage() {
               </div>
             )}
             <h3
-              className="text-base font-bold text-zinc-700"
+              className="text-base font-bold text-white"
               translate="no"
             >
               {lojistaData?.nome || "Sua Loja"}
@@ -243,14 +240,14 @@ export default function LoginPage() {
 
         {/* Card Principal do Formulário */}
         <div
-          className="w-full max-w-sm space-y-6 rounded-2xl border border-zinc-200 bg-white/70 backdrop-blur-md p-6 shadow-2xl text-center"
+          className="w-full max-w-sm space-y-6 rounded-2xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-6 shadow-2xl text-center"
         >
           {/* Título Principal e Subtítulo */}
           <div className="text-center">
-            <h1 className="text-xl font-bold text-zinc-800 mb-1">
+            <h1 className="text-xl font-bold text-white mb-1">
               Bem-vindo(a) à nova era <br /> da Moda Digital
             </h1>
-            <p className="text-sm text-zinc-600">
+            <p className="text-sm text-zinc-400">
               (Provador Virtual IA)
             </p>
           </div>
@@ -259,7 +256,7 @@ export default function LoginPage() {
           {mode === 'login' ? (
             <button
               onClick={() => setMode("register")}
-              className="w-full flex items-center justify-center gap-2 rounded-lg bg-zinc-700 text-white py-2.5 font-semibold text-sm transition-all hover:bg-zinc-800"
+              className="w-full flex items-center justify-center gap-2 rounded-lg bg-purple-600 text-white py-2.5 font-semibold text-sm transition-all hover:bg-purple-700 border-2 border-purple-500/50"
             >
               <UserPlus className="h-4 w-4" />
               Cadastrar conta
@@ -267,7 +264,7 @@ export default function LoginPage() {
           ) : (
              <button
               onClick={() => setMode("login")}
-              className="w-full flex items-center justify-center gap-2 rounded-lg bg-zinc-700 text-white py-2.5 font-semibold text-sm transition-all hover:bg-zinc-800"
+              className="w-full flex items-center justify-center gap-2 rounded-lg bg-purple-600 text-white py-2.5 font-semibold text-sm transition-all hover:bg-purple-700 border-2 border-purple-500/50"
             >
               <LogIn className="h-4 w-4" />
               Já tenho uma conta? Entrar
@@ -282,7 +279,7 @@ export default function LoginPage() {
                 placeholder="Nome completo"
                 value={nome}
                 onChange={(e) => handleNomeChange(e.target.value)}
-                className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-zinc-800 placeholder-zinc-500 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-all text-sm"
+                className="w-full rounded-lg border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md px-4 py-2.5 text-white placeholder-zinc-400 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400 transition-all text-sm"
                 required
               />
             )}
@@ -292,7 +289,7 @@ export default function LoginPage() {
               placeholder="WhatsApp com DDD"
               value={whatsapp}
               onChange={(e) => handleWhatsAppChange(e.target.value)}
-              className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-zinc-800 placeholder-zinc-500 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-all text-sm"
+              className="w-full rounded-lg border-2 border-zinc-600 bg-zinc-900 px-4 py-2.5 text-white placeholder-zinc-500 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-all text-sm"
               required
             />
 
@@ -301,7 +298,7 @@ export default function LoginPage() {
               placeholder="Senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-zinc-800 placeholder-zinc-500 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-all text-sm"
+              className="w-full rounded-lg border-2 border-zinc-600 bg-zinc-900 px-4 py-2.5 text-white placeholder-zinc-500 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-all text-sm"
               required
             />
 
@@ -311,19 +308,19 @@ export default function LoginPage() {
                 placeholder="Confirmar senha"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-zinc-800 placeholder-zinc-500 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-all text-sm"
+                className="w-full rounded-lg border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md px-4 py-2.5 text-white placeholder-zinc-400 focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400 transition-all text-sm"
                 required
               />
             )}
 
             {error && (
-              <p className="text-sm text-red-600">{error}</p>
+              <p className="text-sm text-red-400">{error}</p>
             )}
 
             <button
               type="submit"
               disabled={isSubmitting || !isFormValid()}
-              className="w-full flex items-center justify-center gap-2 rounded-lg bg-teal-600 text-white py-3 font-bold text-sm transition hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 rounded-lg bg-purple-600 text-white py-3 font-bold text-sm transition hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed border-2 border-purple-500/50"
             >
               <LogIn className="h-4 w-4" />
               {mode === "login" ? "Entrar" : "Cadastrar"}
@@ -332,22 +329,22 @@ export default function LoginPage() {
 
           {/* Divisor e Login Social */}
           <div className="space-y-4">
-            <p className="text-sm text-zinc-600">Continuar com...</p>
+            <p className="text-sm text-zinc-400">Continuar com...</p>
             <div className="flex justify-center gap-4">
-              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-200 text-zinc-700 transition hover:bg-zinc-300">
+              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/30 backdrop-blur-md text-white transition hover:bg-purple-500/40 border-2 border-purple-500/50">
                 <FaGoogle />
               </button>
-              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-200 text-zinc-700 transition hover:bg-zinc-300">
+              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/30 backdrop-blur-md text-white transition hover:bg-purple-500/40 border-2 border-purple-500/50">
                 <FaApple />
               </button>
-              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-200 text-zinc-700 transition hover:bg-zinc-300">
+              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/30 backdrop-blur-md text-white transition hover:bg-purple-500/40 border-2 border-purple-500/50">
                 <FaFacebook />
               </button>
             </div>
           </div>
           
           {/* Link de Rodapé */}
-          <p className="text-sm text-zinc-600">
+          <p className="text-sm text-zinc-400">
             {mode === "login" ? (
               <>
                 Não tem uma conta?{" "}
@@ -359,7 +356,7 @@ export default function LoginPage() {
                     setPassword("")
                     setConfirmPassword("")
                   }}
-                  className="font-bold underline text-zinc-800 hover:text-zinc-900 transition"
+                  className="font-bold underline text-white hover:text-zinc-200 transition"
                 >
                   Cadastre-se
                 </button>
@@ -376,7 +373,7 @@ export default function LoginPage() {
                     setConfirmPassword("")
                     setNome("")
                   }}
-                  className="font-bold underline text-zinc-800 hover:text-zinc-900 transition"
+                  className="font-bold underline text-white hover:text-zinc-200 transition"
                 >
                   Entrar
                 </button>

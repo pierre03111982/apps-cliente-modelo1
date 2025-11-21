@@ -85,8 +85,7 @@ export function ExperimentarView({
     <div className="relative min-h-screen w-full font-sans text-zinc-800">
       {/* Background Image Fixa */}
       <div className="fixed inset-0 z-0">
-         <img src="/background.jpg" alt="Background" className="w-full h-full object-cover opacity-30" />
-         <div className="absolute inset-0 bg-white/80 backdrop-blur-sm" />
+         <img src="/background.jpg" alt="Background" className="w-full h-full object-cover" />
       </div>
 
       {/* Conteúdo Principal */}
@@ -95,7 +94,7 @@ export function ExperimentarView({
           {/* Caixa com Logo e Nome da Loja (adaptada) */}
           <div>
             <div
-              className="rounded-xl border border-zinc-200 bg-white/70 backdrop-blur-md px-3 sm:px-4 py-2 shadow-sm flex items-center justify-center gap-2 relative"
+              className="rounded-xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md px-3 sm:px-4 py-2 shadow-lg flex items-center justify-center gap-2 relative"
             >
               <button
                 onClick={() => router.push(`/${lojistaId}/login`)}
@@ -182,7 +181,7 @@ export function ExperimentarView({
               ) : (
                 <label
                   htmlFor="photo-upload"
-                  className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-zinc-300 bg-zinc-50 hover:bg-zinc-100 transition-colors p-6 sm:p-8 md:p-10"
+                  className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-purple-500/50 bg-purple-500/30 backdrop-blur-md hover:bg-purple-500/40 transition-colors p-6 sm:p-8 md:p-10"
                 >
                   <Camera className="h-10 w-10 text-zinc-400" />
                   <span className="text-sm font-medium text-zinc-600 text-center px-2">
@@ -203,7 +202,7 @@ export function ExperimentarView({
             {/* Área: Personalize o seu Look */}
             {userPhotoUrl && (
               <div
-                className="w-full sm:flex-1 self-stretch rounded-xl border border-zinc-200 bg-white/70 backdrop-blur-md p-4 shadow-sm flex flex-col min-h-0 sm:max-w-[48%] md:max-w-[42%]"
+                className="w-full sm:flex-1 self-stretch rounded-xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-4 shadow-lg flex flex-col min-h-0 sm:max-w-[48%] md:max-w-[42%]"
               >
                 <div className="mb-4 shrink-0">
                   <div className="rounded-lg border border-zinc-300 bg-zinc-100 p-2 shadow-sm">
@@ -246,14 +245,14 @@ export function ExperimentarView({
           {/* Caixa com Produtos Selecionados */}
           {userPhotoUrl && selectedProducts.length > 0 && (
             <div
-              className="rounded-xl border border-zinc-200 bg-white/70 backdrop-blur-md p-3 shadow-sm w-full sm:w-[90%] md:w-[80%] lg:w-[70%] mx-auto"
+              className="rounded-xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-3 shadow-lg w-full sm:w-[90%] md:w-[80%] lg:w-[70%] mx-auto"
             >
-              <h3 className="mb-2 text-center text-sm font-bold text-zinc-700">
+              <h3 className="mb-2 text-center text-sm font-bold text-white">
                 Produtos Selecionados
               </h3>
               <div className="grid grid-cols-2 gap-3">
                 {selectedProducts.map((produto, index) => (
-                  <div key={produto.id || index} className="rounded-lg border border-zinc-200 bg-white overflow-hidden shadow-sm relative">
+                  <div key={produto.id || index} className="rounded-lg border-2 border-purple-500 bg-purple-900 overflow-hidden shadow-sm relative">
                     {/* Botão para remover produto */}
                     <button
                       onClick={() => toggleProductSelection(produto)}
@@ -274,8 +273,8 @@ export function ExperimentarView({
                       </div>
                     )}
                     {/* Informações do Produto */}
-                    <div className="p-2 bg-zinc-100">
-                      <h3 className="text-left text-xs font-semibold text-zinc-800 line-clamp-2 h-8">
+                    <div className="p-2 bg-purple-950">
+                      <h3 className="text-left text-xs font-semibold text-white line-clamp-2 h-8">
                         {produto.nome}
                       </h3>
                       <div className="flex flex-col gap-0.5 mt-1">
@@ -289,18 +288,18 @@ export function ExperimentarView({
                           if (descontoAplicado && descontoValido) {
                             return (
                               <>
-                                <p className="text-left text-xs text-zinc-500 line-through">
+                                <p className="text-left text-xs text-zinc-400 line-through">
                                   {formatPrice(produto.preco)}
                                 </p>
                                 <div className="flex items-center gap-1 flex-wrap">
-                                  <p className="text-left text-sm font-bold text-green-600">
+                                  <p className="text-left text-sm font-bold text-green-500">
                                     {formatPrice(
                                       produto.preco
                                         ? produto.preco * (1 - desconto / 100)
                                         : 0
                                     )}
                                   </p>
-                                  <p className="text-left text-[10px] font-semibold text-green-500 leading-tight">
+                                  <p className="text-left text-[10px] font-semibold text-green-400 leading-tight">
                                     Desconto aplicado
                                   </p>
                                 </div>
@@ -308,7 +307,7 @@ export function ExperimentarView({
                             );
                           }
                           return (
-                            <p className="text-left text-sm font-bold text-zinc-800">
+                            <p className="text-left text-sm font-bold text-amber-300">
                               {formatPrice(produto.preco)}
                             </p>
                           );
@@ -324,15 +323,15 @@ export function ExperimentarView({
           {/* Aviso sobre seleção de produtos */}
           {userPhotoUrl && (
             <div
-              className="rounded-xl border border-yellow-500/30 bg-yellow-500/10 backdrop-blur-md p-3 shadow-sm"
+              className="rounded-xl border-2 border-blue-500/50 bg-blue-500/10 backdrop-blur-md p-3 shadow-lg"
             >
               {isRefineMode ? (
-                <p className="text-xs font-medium text-yellow-700 text-center">
-                  ✨ <span className="font-bold">Modo Refinamento:</span> Adicione até <span className="font-bold">2 acessórios leves</span>.
+                <p className="text-xs font-medium text-blue-200 text-center">
+                  ✨ <span className="font-bold">Modo Refinamento:</span> Adicione até <span className="font-bold text-yellow-300">2 acessórios leves</span> (Jóias, Óculos, Cosméticos, Tintura). Roupas e Calçados não são permitidos.
                 </p>
               ) : (
-                <p className="text-xs font-medium text-yellow-700 text-center">
-                  💡 Você pode selecionar até <span className="font-bold">2 produtos</span> de <span className="font-bold">categorias diferentes</span>
+                <p className="text-xs font-medium text-blue-200 text-center">
+                  💡 Você pode selecionar até <span className="font-bold text-yellow-300">2 produtos</span> de <span className="font-bold text-yellow-300">categorias diferentes</span>
                 </p>
               )}
             </div>
@@ -340,24 +339,24 @@ export function ExperimentarView({
 
           {/* Caixa de Redes Sociais e Desconto */}
           <div
-            className="rounded-xl border border-zinc-200 bg-white/70 backdrop-blur-md px-4 py-3 shadow-sm"
+            className="rounded-xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md px-4 py-3 shadow-lg"
           >
             <div className="flex flex-col items-center gap-3">
-              <div className="rounded-md border border-red-200 bg-red-50/70 px-3 py-1.5">
-                <p className="text-xs font-medium text-red-700 text-center">Siga, Curta ou Compartilhe !!!<br/>Aplique o seu Desconto agora!</p>
+              <div className="rounded-md border-2 border-white/50 bg-purple-500/30 backdrop-blur-md px-3 py-1.5">
+                <p className="text-xs font-medium text-white text-center">Siga, Curta ou Compartilhe !!!<br/>Aplique o seu Desconto agora!</p>
               </div>
               <div className="flex items-center justify-center gap-3 flex-wrap">
-                {lojistaData?.redesSociais?.instagram ? (<button onClick={() => handleSocialClick(lojistaData.redesSociais.instagram!.startsWith('http') ? lojistaData.redesSociais.instagram! : `https://instagram.com/${lojistaData.redesSociais.instagram!.replace('@', '')}`)} className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white transition hover:scale-110 cursor-pointer"><Instagram className="h-4 w-4" /></button>) : (<div className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white opacity-50"><Instagram className="h-4 w-4" /></div>)}
-                {lojistaData?.redesSociais?.facebook ? (<button onClick={() => handleSocialClick(lojistaData.redesSociais.facebook!.startsWith('http') ? lojistaData.redesSociais.facebook! : `https://facebook.com/${lojistaData.redesSociais.facebook!}`)} className="flex items-center justify-center w-9 h-9 rounded-full bg-blue-600 text-white transition hover:scale-110 cursor-pointer"><Facebook className="h-4 w-4" /></button>) : (<div className="flex items-center justify-center w-9 h-9 rounded-full bg-blue-600 text-white opacity-50"><Facebook className="h-4 w-4" /></div>)}
-                {lojistaData?.redesSociais?.tiktok ? (<button onClick={() => handleSocialClick(lojistaData.redesSociais.tiktok!.startsWith('http') ? lojistaData.redesSociais.tiktok! : `https://tiktok.com/@${lojistaData.redesSociais.tiktok!.replace('@', '')}`)} className="flex items-center justify-center w-9 h-9 rounded-full bg-black text-white transition hover:scale-110 cursor-pointer"><Music2 className="h-4 w-4" /></button>) : (<div className="flex items-center justify-center w-9 h-9 rounded-full bg-black text-white opacity-50"><Music2 className="h-4 w-4" /></div>)}
-                <button onClick={handleShareApp} className="flex items-center justify-center w-9 h-9 rounded-full bg-green-500 text-white transition hover:scale-110 cursor-pointer" title="Compartilhar aplicativo"><Share2 className="h-4 w-4" /></button>
+                {lojistaData?.redesSociais?.instagram ? (<button onClick={() => handleSocialClick(lojistaData.redesSociais.instagram!.startsWith('http') ? lojistaData.redesSociais.instagram! : `https://instagram.com/${lojistaData.redesSociais.instagram!.replace('@', '')}`)} className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white transition hover:scale-110 cursor-pointer"><Instagram className="h-5 w-5" /></button>) : (<div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white opacity-50"><Instagram className="h-5 w-5" /></div>)}
+                {lojistaData?.redesSociais?.facebook ? (<button onClick={() => handleSocialClick(lojistaData.redesSociais.facebook!.startsWith('http') ? lojistaData.redesSociais.facebook! : `https://facebook.com/${lojistaData.redesSociais.facebook!}`)} className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 text-white transition hover:scale-110 cursor-pointer"><Facebook className="h-5 w-5" /></button>) : (<div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 text-white opacity-50"><Facebook className="h-5 w-5" /></div>)}
+                {lojistaData?.redesSociais?.tiktok ? (<button onClick={() => handleSocialClick(lojistaData.redesSociais.tiktok!.startsWith('http') ? lojistaData.redesSociais.tiktok! : `https://tiktok.com/@${lojistaData.redesSociais.tiktok!.replace('@', '')}`)} className="flex items-center justify-center w-10 h-10 rounded-full bg-black text-white transition hover:scale-110 cursor-pointer"><Music2 className="h-5 w-5" /></button>) : (<div className="flex items-center justify-center w-10 h-10 rounded-full bg-black text-white opacity-50"><Music2 className="h-5 w-5" /></div>)}
+                <button onClick={handleShareApp} className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 text-white transition hover:scale-110 cursor-pointer" title="Compartilhar aplicativo"><Share2 className="h-5 w-5" /></button>
               </div>
               {(() => { const desconto = lojistaData?.descontoRedesSociais; const expiraEm = lojistaData?.descontoRedesSociaisExpiraEm; if (!desconto || desconto <= 0) { return null } if (expiraEm) { const dataExpiracao = new Date(expiraEm); const agora = new Date(); if (dataExpiracao < agora) { return null } } return (
                 <>
-                  <p className="text-sm font-bold text-zinc-700 text-center">
-                    GANHE <span className="text-xl font-black text-green-600">{desconto}%</span> de DESCONTO!
+                  <p className="text-sm font-bold text-amber-300 text-center">
+                    GANHE <span className="text-xl font-black text-amber-300">{desconto}%</span> de <span className="text-amber-300 font-bold">DESCONTO</span> em Todos os Produtos!
                   </p>
-                  {descontoAplicado && (<p className="text-xs font-semibold text-green-500 text-center animate-pulse">✓ Desconto aplicado!</p>)}
+                  {descontoAplicado && (<p className="text-xs font-semibold text-green-400 text-center animate-pulse">✓ Desconto aplicado!</p>)}
                 </>
               )})()}
             </div>
@@ -365,7 +364,7 @@ export function ExperimentarView({
 
           {/* Card Principal */}
           <div
-            className="rounded-2xl border border-zinc-200 bg-white/70 backdrop-blur-md p-5 shadow-sm"
+            className="rounded-2xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md p-5 shadow-lg"
           >
             {/* Abas de Categoria */}
             <div className="mb-4 overflow-x-auto pb-2 -mx-2 sm:mx-0">
@@ -376,8 +375,8 @@ export function ExperimentarView({
                     onClick={() => setActiveCategory(category)}
                     className={`rounded-full px-3 py-1.5 text-xs font-semibold transition whitespace-nowrap flex-shrink-0 ${
                       activeCategory === category
-                        ? "bg-zinc-900 text-white border border-zinc-900 shadow-md"
-                        : "bg-white text-zinc-500 border border-zinc-200 hover:border-zinc-300"
+                        ? "bg-purple-600 text-white border-2 border-purple-500 shadow-md"
+                        : "bg-purple-600 text-white border-2 border-white/80 hover:bg-purple-700"
                     }`}
                   >
                     {category}
@@ -387,33 +386,33 @@ export function ExperimentarView({
             </div>
 
             {/* Aviso de categoria */}
-            {categoryWarning && (<div className="mb-4 rounded-lg border border-yellow-500/50 bg-yellow-500/10 p-3"><p className="text-sm font-medium text-yellow-700">{categoryWarning}</p></div>)}
+            {categoryWarning && (<div className="mb-4 rounded-lg border-2 border-blue-500/50 bg-blue-500/10 backdrop-blur-md p-3 shadow-lg"><p className="text-sm font-medium text-blue-200">{categoryWarning}</p></div>)}
 
             {/* Grid de Produtos */}
-            {isLoadingCatalog ? (<div className="py-10 text-center text-zinc-400 text-xs">Carregando produtos...</div>) : filteredCatalog.length === 0 ? (<div className="py-10 text-center text-zinc-500 text-xs">Nenhum produto encontrado.</div>) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-[50vh] sm:max-h-[60vh] overflow-y-auto pb-4 pr-2 custom-scrollbar justify-items-center">
+            {isLoadingCatalog ? (<div className="py-10 text-center text-white">Carregando produtos...</div>) : filteredCatalog.length === 0 ? (<div className="py-10 text-center text-white/70">Nenhum produto encontrado nesta categoria.</div>) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 max-h-[50vh] sm:max-h-[60vh] overflow-y-auto pb-4 pr-2 custom-scrollbar justify-items-center">
                 {filteredCatalog.map((produto) => { const isSelected = selectedProducts.some((p) => p.id === produto.id); return (
                   <button
                     key={produto.id}
                     onClick={() => toggleProductSelection(produto)}
-                    className={`group relative overflow-hidden rounded-xl border transition w-full ${
+                    className={`group relative overflow-hidden rounded-xl border-2 transition w-full ${
                       isSelected
-                        ? "border-green-500 bg-green-50 shadow-md shadow-green-500/20"
-                        : "border-zinc-200 bg-white hover:border-zinc-300"
+                        ? "border-purple-500 bg-purple-500/10 shadow-glow ring-2 ring-purple-500"
+                        : "border-zinc-700 bg-purple-500/30 backdrop-blur-md hover:border-purple-500/50"
                     }`}
                   >
                     {produto.imagemUrl && (<div className="relative aspect-square w-full"><Image src={produto.imagemUrl} alt={produto.nome} fill className="object-cover" /></div>)}
-                    <div className="p-2 bg-zinc-100">
-                      <h3 className="text-left text-xs font-semibold text-zinc-800 line-clamp-2 h-8">
+                    <div className="p-3 bg-purple-500/30 backdrop-blur-md">
+                      <h3 className="text-left text-sm font-semibold text-white line-clamp-2">
                         {produto.nome}
                       </h3>
-                      <div className="mt-1 flex flex-col gap-0.5">{(() => { const desconto = lojistaData?.descontoRedesSociais; const expiraEm = lojistaData?.descontoRedesSociaisExpiraEm; const descontoValido = desconto && desconto > 0 && (!expiraEm || new Date(expiraEm) >= new Date()); if (descontoAplicado && descontoValido) { return (<><p className="text-left text-xs text-zinc-500 line-through">{formatPrice(produto.preco)}</p><div className="flex items-center gap-1"><p className="text-left text-sm font-bold text-green-600">{formatPrice(produto.preco ? produto.preco * (1 - (desconto / 100)) : 0)}</p><p className="text-left text-[10px] font-semibold text-green-500">Desconto aplicado</p></div></>) } return (
-                        <p className="text-left text-sm font-bold text-zinc-800">
+                      <div className="mt-1 flex flex-col gap-0.5">{(() => { const desconto = lojistaData?.descontoRedesSociais; const expiraEm = lojistaData?.descontoRedesSociaisExpiraEm; const descontoValido = desconto && desconto > 0 && (!expiraEm || new Date(expiraEm) >= new Date()); if (descontoAplicado && descontoValido) { return (<><p className="text-left text-xs text-zinc-400 line-through">{formatPrice(produto.preco)}</p><div className="flex items-center gap-2"><p className="text-left text-sm font-bold text-green-500">{formatPrice(produto.preco ? produto.preco * (1 - (desconto / 100)) : 0)}</p><p className="text-left text-[10px] font-semibold text-green-400">Desconto aplicado</p></div></>) } return (
+                        <p className="text-left text-sm font-bold text-white">
                           {formatPrice(produto.preco)}
                         </p>
                       )})()}</div>
                     </div>
-                    {isSelected && (<div className="absolute right-2 top-2 rounded-full bg-green-500 text-white p-1 shadow-md"><Check className="h-3 w-3" /></div>)}
+                    {isSelected && (<div className="absolute right-2 top-2 rounded-full bg-purple-600 p-1.5 shadow-lg"><Check className="h-4 w-4 text-white" /></div>)}
                   </button>
                 )})}
               </div>
@@ -424,42 +423,49 @@ export function ExperimentarView({
 
       {/* Botão FAB - Visualize */}
       {(userPhotoUrl) && selectedProducts.length > 0 && (
-          <div className="fixed bottom-6 right-6 z-50">
+          <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 p-0.5 sm:p-1 rounded-full shadow-lg" style={{ background: 'linear-gradient(to right, #facc15, #ec4899, #a855f7, #3b82f6, #10b981)' }}>
               <button 
                 onClick={handleVisualize}
                 disabled={isGenerating}
-                className="bg-zinc-900 text-white px-5 py-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-zinc-800 transition-transform hover:scale-105 disabled:opacity-70 text-sm font-bold"
+                className="flex items-center gap-1.5 sm:gap-2 rounded-full bg-purple-600 px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold text-white transition hover:bg-purple-700 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed w-full h-full"
               >
                   {isGenerating ? (
-                      <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <>
+                        <div className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                        <span className="hidden sm:inline">Gerando...</span>
+                        <span className="sm:hidden">...</span>
+                      </>
                   ) : (
-                      <Wand2 className="h-4 w-4" />
+                      <>
+                        <Wand2 className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
+                        <span className="hidden sm:inline">CRIAR LOOK</span>
+                        <span className="sm:hidden">CRIAR</span>
+                      </>
                   )}
-                  Visualizar
               </button>
           </div>
       )}
 
       {/* Mensagem de erro */}
-      {generationError && (<div className="fixed bottom-24 left-1/2 z-50 -translate-x-1/2 rounded-lg border border-red-500/50 bg-red-500/10 p-3 backdrop-blur"><p className="text-sm font-medium text-red-700">{generationError}</p></div>)}
+      {generationError && (<div className="fixed bottom-24 left-1/2 z-50 -translate-x-1/2 rounded-lg border-2 border-red-500/50 bg-red-500/10 px-4 py-3 backdrop-blur-md"><p className="text-sm font-medium text-red-200">{generationError}</p></div>)}
 
       {/* Modal de Favoritos (mantido como está) */}
       {showFavoritesModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-4xl rounded-xl border border-white/20 bg-white/10 backdrop-blur-lg p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-4xl rounded-xl border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-lg p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-xl font-bold text-white">Meus Favoritos</h2>
-              <button onClick={() => setShowFavoritesModal(false)} className="text-white/70 hover:text-white transition"><X className="h-5 w-5" /></button>
+              <button onClick={() => setShowFavoritesModal(false)} className="text-white/70 hover:text-white transition"><X className="h-6 w-6" /></button>
             </div>
             {isLoadingFavorites ? (
-              <div className="py-10 text-center text-white/70">Carregando...</div>
+              <div className="py-12 text-center text-white">Carregando favoritos...</div>
             ) : favorites.length === 0 ? (
-              <div className="py-10 text-center text-white/70">
-                <Heart className="mx-auto mb-3 h-14 w-14 text-white/30" />
+              <div className="py-12 text-center text-white/70">
+                <Heart className="mx-auto mb-4 h-16 w-16 text-white/30" />
                 <p>Você ainda não tem favoritos.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {favorites.map((favorito) => (
                   <div
                     key={favorito.id}
@@ -481,7 +487,7 @@ export function ExperimentarView({
                       // Recarregar a página para aplicar as mudanças
                       window.location.href = `/${lojistaId}/resultado?from=favoritos`
                     }}
-                    className="group relative overflow-hidden rounded-lg border border-zinc-200 bg-white hover:bg-zinc-100 transition cursor-pointer"
+                    className="group relative overflow-hidden rounded-lg border-2 border-purple-500/50 bg-purple-500/30 backdrop-blur-md transition hover:border-purple-500/50 cursor-pointer"
                   >
                     {favorito.imagemUrl && (
                       <div className="relative aspect-square w-full">
@@ -494,12 +500,12 @@ export function ExperimentarView({
                       </div>
                     )}
                     {favorito.productName && (
-                      <div className="p-2 bg-zinc-100">
-                        <p className="text-sm font-semibold text-zinc-800 line-clamp-2">
+                      <div className="p-3 bg-purple-500/30 backdrop-blur-md">
+                        <p className="text-sm font-semibold text-white line-clamp-2">
                           {favorito.productName}
                         </p>
                         {favorito.productPrice && (
-                          <p className="mt-0.5 text-xs font-bold text-green-600">
+                          <p className="mt-1 text-xs font-bold text-green-500">
                             {formatPrice(favorito.productPrice)}
                           </p>
                         )}
