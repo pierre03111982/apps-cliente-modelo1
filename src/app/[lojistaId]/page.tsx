@@ -768,7 +768,7 @@ function ClienteAppPageContent() {
   }
 
   return (
-    <main className="min-h-screen bg-black px-4 py-12">
+    <main className="min-h-screen px-4 py-12">
       {isLoading && <LoadingOverlay />}
 
       <div
@@ -776,7 +776,7 @@ function ClienteAppPageContent() {
           isLoading ? "pointer-events-none opacity-40" : "opacity-100"
         }`}
       >
-          <div className="rounded-3xl border border-white/20 bg-gradient-to-br from-blue-800/90 via-indigo-700/90 to-purple-500/90 p-6 shadow-xl shadow-black/30 backdrop-blur-md md:p-12">
+          <div className="rounded-3xl p-6 md:p-12">
           {renderStep()}
         </div>
       </div>
